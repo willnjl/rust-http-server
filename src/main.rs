@@ -7,8 +7,8 @@ async fn main() -> std::io::Result<()> {
     let port = 3000;
     let address = format!("127.0.0.1:{}", port);
 
-    let listener =
-        TcpListener::bind(&address).unwrap_or_else(|_| panic!("Failed to bind to address:{}", &address));
+    let listener = TcpListener::bind(&address)
+        .unwrap_or_else(|_| panic!("Failed to bind to address:{}", &address));
 
     run(listener)?.await
 }
