@@ -1,27 +1,14 @@
-use actix_web::{get, post, web, App, HttpRequest, HttpResponse, HttpServer, Responder};
+use std::net::TcpListener;
 
-#[get("/")]
-async fn hello() -> impl Responder {
-    HttpResponse::Ok().body("Hello world!")
-}
-
-#[post("/echo")]
-async fn echo(req_body: String) -> impl Responder {
-    HttpResponse::Ok().body(req_body)
-}
-
-async fn health_check() -> impl Responder {
-    HttpResponse::Ok()
-}
+use rust_server::run;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| {
-        App::new()
-            .service(hello)
-            .route("/health-check", web::get().to(health_check))
-    })
-    .bind(("127.0.0.1", 3000))?
-    .run()
-    .await
+    let port = 3000;
+    let address = format!("127.0.0.1:{}", port);
+
+    let listener =
+        TcpListener::bind(&address).expect(&format!("Failed to bind to address:{}", &address));
+
+    run(listener)?.await
 }

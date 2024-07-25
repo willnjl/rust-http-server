@@ -1,0 +1,13 @@
+
+/*
+    Development
+*/
+
+cargo watch -x test -x run
+
+
+/*
+    Health Check
+*/
+
+curl -v http://localhost:3000/health-check

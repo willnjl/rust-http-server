@@ -1,14 +1,18 @@
 [package]
 edition = "2021"
-name = "stream"
+name = "rust-server"
 version = "0.1.0"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+path = "src/lib.rs"
 
 [dependencies]
 actix-web = "4.8.0"
+reqwest = "0.12.5"
 tokio = {version = "1.39.1", features = ["macros", "rt-multi-thread"]}
 
 [[bin]]
-name = "stream"
+name = "rust-server"
 path = "src/main.rs"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
