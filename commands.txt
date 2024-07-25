@@ -11,3 +11,16 @@ cargo watch -x test -x run
 */
 
 curl -v http://localhost:3000/health-check
+
+
+/*
+
+Docker
+
+*/
+
+
+
+// -- start db
+
+./scripts/init_db.sh
