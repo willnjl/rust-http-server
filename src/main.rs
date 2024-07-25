@@ -1,14 +1,13 @@
 use std::net::TcpListener;
 
-use rust_server::run;
+use rust_server::{configuration::get_configuration, startup::run};
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    let port = 3000;
-    let address = format!("127.0.0.1:{}", port);
-
-    let listener = TcpListener::bind(&address)
-        .unwrap_or_else(|_| panic!("Failed to bind to address:{}", &address));
-
+    // Panic if we can't read configuration
+    let configuration = get_configuration().expect("Failed to read configuration.");
+    // We have removed the hard-coded `8000` - it's now coming from our settings!
+    let address = format!("127.0.0.1:{}", configuration.application_port);
+    let listener = TcpListener::bind(address)?;
     run(listener)?.await
 }
