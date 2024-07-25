@@ -1,11 +1,14 @@
-use axum::{routing::get, Router};
+use std::net::TcpListener;
 
-#[tokio::main]
-async fn main() {
-    // build our application with a single route
-    let app = Router::new().route("/", get(|| async { "Hello, Will!" }));
+use rust_server::run;
 
-    // run our app with hyper, listening globally on port 3000
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
-    axum::serve(listener, app).await.unwrap();
+#[actix_web::main]
+async fn main() -> std::io::Result<()> {
+    let port = 3000;
+    let address = format!("127.0.0.1:{}", port);
+
+    let listener = TcpListener::bind(&address)
+        .unwrap_or_else(|_| panic!("Failed to bind to address:{}", &address));
+
+    run(listener)?.await
 }
