@@ -1,3 +1,5 @@
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
 [package]
 edition = "2021"
 name = "rust-server"
@@ -16,5 +18,3 @@ tokio = {version = "1.39.1", features = ["macros", "rt-multi-thread"]}
 [[bin]]
 name = "rust-server"
 path = "src/main.rs"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
