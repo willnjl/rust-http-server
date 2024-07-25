@@ -10,7 +10,7 @@ async fn echo(req_body: String) -> impl Responder {
     HttpResponse::Ok().body(req_body)
 }
 
-async fn health_check(_req: HttpRequest) -> impl Responder {
+async fn health_check() -> impl Responder {
     HttpResponse::Ok()
 }
 
