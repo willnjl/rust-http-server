@@ -1,3 +1,3 @@
 # Rust HTTP Server
 
-expirementing with Rust and the actix_web framework
+expirementing with Rust and the actix-web framework
