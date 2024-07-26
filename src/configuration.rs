@@ -18,7 +18,7 @@ pub struct DatabaseSettings {
 impl DatabaseSettings {
     pub fn connection_string(&self) -> String {
         format!(
-            "postgresL//{}:{}@{}:{}/{}",
+            "postgres://{}:{}@{}:{}/{}",
             self.username, self.password, self.host, self.port, self.database_name,
         )
     }

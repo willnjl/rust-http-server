@@ -1,6 +1,8 @@
 //! tests/health_check.rs
 // `cargo expand --test health_check` (<- name of the test file)
 
+use rust_server::configuration::get_configuration;
+use sqlx::{Connection, PgConnection};
 use std::net::TcpListener;
 
 #[actix_web::test]
@@ -25,7 +27,7 @@ fn spawn_app() -> String {
     let listener = TcpListener::bind("127.0.0.1:0").expect("Faild to bind random port");
     let port = listener.local_addr().unwrap().port();
 
-    let server = rust_server::run(listener).expect("Failed to bind address");
+    let server = rust_server::startup::run(listener).expect("Failed to bind address");
     let _ = tokio::spawn(server);
 
     format!("http://127.0.0.1:{}", port)
@@ -34,7 +36,14 @@ fn spawn_app() -> String {
 #[tokio::test]
 async fn subscribe_returns_a_200_for_valid_form_data() {
     // Arrange
+
     let app_address = spawn_app();
+    let configuration = get_configuration().expect("Failed to read configuration");
+    let connection_string = configuration.database.connection_string();
+    let connection = PgConnection::connect(&connection_string)
+        .await
+        .expect("Failed to connect to Postgres.");
+
     let client = reqwest::Client::new();
     // Act
     let body = "name=le%20guin&email=ursula_le_guin%40gmail.com";

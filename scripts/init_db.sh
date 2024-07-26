@@ -31,7 +31,7 @@ fi
 
 
 # Launch docker
-if [[ -z "${SKIP_DOCKER}" ]] then
+if [[ -z "${SKIP_DOCKER}" ]]; then
     docker run \
     -e POSTGRES_USER=${DB_USER} \
     -e POSTGRES_PASSWORD=${DB_PASSWORD} \
