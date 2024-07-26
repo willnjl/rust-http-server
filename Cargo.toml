@@ -10,11 +10,13 @@ path = "src/lib.rs"
 
 [dependencies]
 actix-web = "4.8.0"
+chrono = "0.4.38"
 config = "0.11.0"
 reqwest = "0.12.5"
 serde = {version = "1.0", features = ["derive"]}
 serde_json = "1.0.108"
 tokio = {version = "1.39.1", features = ["macros", "rt-multi-thread"]}
+uuid = {version = "1.10.0", features = ["v4"]}
 
 [dependencies.sqlx]
 default-features = false
