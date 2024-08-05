@@ -3,7 +3,7 @@
     Development
 */
 
-cargo watch -x test -x run
+cargo watch -x "test -- --nocapture" -x run
 
 
 /*
